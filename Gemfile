@@ -8,11 +8,15 @@ gem 'rails-api'
 gem 'spring', :group => :development
 
 
-gem 'sqlite3'
+gem 'sqlite3', group: [:development, :test]
 
 # For image hosting
 gem 'paperclip'
 gem 'aws-sdk', '< 2.0'
+
+# heroku gems
+gem 'pg', group: :production
+gem 'rails_12factor', group: :production
 
 
 # To use ActiveModel has_secure_password
