@@ -7,6 +7,5 @@ class Report < ActiveRecord::Base
 
   validates :location_id, :presence => true
   validates :user_id, :presence => true
-  validates :lat, :presence => true
-  validates :long, :presence => true
+  validates :geolocation, :presence => true
 end

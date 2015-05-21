@@ -7,15 +7,16 @@ gem 'rails-api'
 
 gem 'spring', :group => :development
 
-
-gem 'sqlite3', group: [:development, :test]
+# Move development mode to postgres
+#gem 'sqlite3', group: [:development, :test
 
 # For image hosting
 gem 'paperclip'
 gem 'aws-sdk', '< 2.0'
 
-# heroku gems
-gem 'pg', group: :production
+gem 'pg'
+# Only this version supports ActiveRecord 4.2
+gem 'activerecord-postgis-adapter', '3.0.0.beta5'
 gem 'rails_12factor', group: :production
 
 
@@ -23,7 +24,7 @@ gem 'rails_12factor', group: :production
 # gem 'bcrypt', '~> 3.1.7'
 
 # To use Jbuilder templates for JSON
-# gem 'jbuilder'
+gem 'jbuilder'
 
 # Use unicorn as the app server
 # gem 'unicorn'

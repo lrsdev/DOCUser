@@ -11,16 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150521000614) do
+ActiveRecord::Schema.define(version: 20150521092955) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+  enable_extension "postgis"
 
   create_table "locations", force: :cascade do |t|
-    t.integer  "location_type",      default: 1
+    t.integer  "location_type"
     t.string   "name"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
     t.text     "blurb"
-    t.text     "dog_guide_lines"
-    t.integer  "dog_status",         default: 1
+    t.text     "dog_guidelines"
+    t.integer  "dog_status"
+    t.geometry "geo_access_points",  limit: {:srid=>0, :type=>"multi_point"}
+    t.geometry "geo_fence",          limit: {:srid=>0, :type=>"polygon"}
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
@@ -28,15 +32,11 @@ ActiveRecord::Schema.define(version: 20150521000614) do
   end
 
   create_table "reports", force: :cascade do |t|
-    t.integer  "location_id"
     t.integer  "user_id"
+    t.integer  "location_id"
     t.integer  "animal_id"
     t.text     "blurb"
-    t.string   "image_url"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
-    t.decimal  "lat"
-    t.decimal  "long"
+    t.geometry "geolocation",        limit: {:srid=>0, :type=>"point"}
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
@@ -48,11 +48,12 @@ ActiveRecord::Schema.define(version: 20150521000614) do
     t.string   "middle_names"
     t.string   "last_name"
     t.string   "email"
-    t.string   "image_url"
     t.string   "password"
     t.string   "api_key"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
 end

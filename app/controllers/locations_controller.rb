@@ -62,6 +62,6 @@ class LocationsController < ApplicationController
 
     def location_params
       params.require(:location).permit(:location_type, :name, :blurb, 
-                                       :dog_guide_lines, :dog_status, :image)
+                                       :dog_guidelines, :dog_status, :image)
     end
 end
