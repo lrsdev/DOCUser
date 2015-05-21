@@ -20,6 +20,13 @@ class LocationsController < ApplicationController
   def create
     @location = Location.new(location_params)
 
+    image_params = params[:image]
+    encoded_image = image_params[:image_data]
+    content_type = image_params[:image_content_data]
+    image = Paperclip.io_adapters.for("data:#{content_type};base64,#{encoded_image}")
+    image.original_filename = image_params[:image_filename]
+    @location.image = image
+
     if @location.save
       render json: @location, status: :created, location: @location
     else
@@ -54,6 +61,7 @@ class LocationsController < ApplicationController
     end
 
     def location_params
-      params.require(:location).permit(:location_type, :name)
+      params.require(:location).permit(:location_type, :name, :blurb, 
+                                       :dog_guide_lines, :dog_status, :image)
     end
 end
