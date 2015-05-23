@@ -5,8 +5,8 @@ class LocationsController < ApplicationController
   # GET /locations.json
   def index
     @locations = Location.all
-
-    render json: @locations
+    render json: @locations, :only => [:id, :location_type, :blurb, :dog_guidelines, :dog_status],
+      :methods => [:image_thumb, :image_medium]
   end
 
   # GET /locations/1
