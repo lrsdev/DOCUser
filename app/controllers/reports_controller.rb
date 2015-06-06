@@ -4,9 +4,14 @@ class ReportsController < ApplicationController
   # GET /reports
   # GET /reports.json
   def index
-    @reports = Report.all
+    if(params.has_key?(:location_id))
+      @reports = Array.wrap(Report.where(location_id: params[:location_id]))
+    else
+      @reports = Report.all 
+    end
 
-    render json: @reports
+    render json: @reports, :only => [:id, :location_id, :user_id, :blurb, :animal_id, :submitted_at],
+      :methods => [:image_thumb, :image_medium, :location]
   end
 
   # GET /reports/1
@@ -61,6 +66,6 @@ class ReportsController < ApplicationController
   end
 
   def report_params
-    params.require(:report).permit(:location_id, :user_id, :animal_id, :blurb, :image, :geolocation)
+    params.permit(:location_id, :user_id, :animal_id, :blurb, :image, :geolocation, :submitted_at)
   end
 end
