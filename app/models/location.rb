@@ -8,7 +8,7 @@ class Location < ActiveRecord::Base
 
   # Enums for state representation 0 =>
   enum location_type: [ :beach ]
-  enum dog_status: [ :on_lead, :off_lead, :no_dogs ]
+  enum dog_status: [ "on lead", "off lead", "no dogs" ]
 
   has_attached_file :image, :styles => { :medium => "300x300>", :thumb => "100x100>" }
   validates_attachment_presence :image
@@ -20,5 +20,11 @@ class Location < ActiveRecord::Base
 
   def image_medium
     image.url(:medium)
+  end
+
+  def access_points
+    a = Array.new
+    geo_access_points.each {|p| a << {'latitude': p.x, 'longitude': p.y}}
+    return a
   end
 end

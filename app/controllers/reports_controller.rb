@@ -10,8 +10,7 @@ class ReportsController < ApplicationController
       @reports = Report.all 
     end
 
-    render json: @reports, :only => [:id, :location_id, :user_id, :blurb, :animal_id, :submitted_at],
-      :methods => [:image_thumb, :image_medium, :location]
+    render json: @reports
   end
 
   # GET /reports/1

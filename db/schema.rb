@@ -11,24 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150521092955) do
+ActiveRecord::Schema.define(version: 20150606093230) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
 
   create_table "locations", force: :cascade do |t|
-    t.integer  "location_type"
-    t.string   "name"
-    t.text     "blurb"
-    t.text     "dog_guidelines"
-    t.integer  "dog_status"
-    t.geometry "geo_access_points",  limit: {:srid=>0, :type=>"multi_point"}
-    t.geometry "geo_fence",          limit: {:srid=>0, :type=>"polygon"}
-    t.string   "image_file_name"
-    t.string   "image_content_type"
-    t.integer  "image_file_size"
-    t.datetime "image_updated_at"
+    t.integer   "location_type"
+    t.string    "name"
+    t.text      "blurb"
+    t.text      "dog_guidelines"
+    t.integer   "dog_status"
+    t.geometry  "geo_access_points",  limit: {:srid=>0, :type=>"multi_point"}
+    t.geometry  "geo_fence",          limit: {:srid=>0, :type=>"polygon"}
+    t.string    "image_file_name"
+    t.string    "image_content_type"
+    t.integer   "image_file_size"
+    t.datetime  "image_updated_at"
+    t.geography "latlon",             limit: {:srid=>4326, :type=>"point", :geographic=>true}
   end
 
   create_table "reports", force: :cascade do |t|
@@ -41,6 +42,7 @@ ActiveRecord::Schema.define(version: 20150521092955) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.datetime "submitted_at"
   end
 
   create_table "users", force: :cascade do |t|
