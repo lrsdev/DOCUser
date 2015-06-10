@@ -30,6 +30,11 @@ class ReportsController < ApplicationController
     image = Paperclip.io_adapters.for("data:#{content_type};base64,#{encoded_image}")
     image.original_filename = image_params[:image_filename]
     @report.image = image
+    
+    lat = params[:latitude]
+    long = params[:longitude]
+    p = RGeo::Cartesian.factory.point(lat, long)
+    @report.geolocation = p
 
     if @report.save
       render json: @report, status: :created, location: @report
@@ -65,6 +70,10 @@ class ReportsController < ApplicationController
   end
 
   def report_params
-    params.permit(:location_id, :user_id, :animal_id, :blurb, :image, :geolocation, :submitted_at)
+    params.permit(:location_id, :user_id, :animal_id, :blurb, :geolocation, :submitted_at)
+  end
+
+  def extra_params
+    params.permit(:image, :latitude, :longitude)
   end
 end
