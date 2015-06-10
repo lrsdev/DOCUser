@@ -1,26 +1,28 @@
 Location.create(id: 1, name: 'St Claire', location_type: 0, blurb: 'Nice beach, just 5 minutes drive from the City Center', 
-                dog_guidelines: 'No dogs North of esplanade', dog_status: 0, geo_access_points: 'MULTIPOINT((-45.9092631 170.4885635))',
+                dog_guidelines: 'Dogs are not allowed on the beach from the Salt Water Pool to the nearest piles on the beach to the North. Dogs must be on lead in other areas.',
+		dog_status: 1, geo_access_points: 'MULTIPOINT((-45.911775 170.490659))',
                 image: open('http://ih0.redbubble.net/image.3998569.1307/flat,550x550,075,f.jpg', "r"),
-               image_file_name: 'stclaire.jpg')
+                image_file_name: 'stclaire.jpg')
 
 Location.create(id: 2, name: 'St Kilda', location_type: 0, blurb: '5 minutes drive from the city, South of St. Claire.',
-                dog_guidelines: 'Dogs okay in all areas of beach', dog_status: 0, geo_access_points: 'MULTIPOINT((-45.901957 170.5056987))',
+                dog_guidelines: 'Dogs allowed off lead. Take care around rocks to at the extreme North end of the beach, wildlife may be present here.', 
+		dog_status: 0, geo_access_points: 'MULTIPOINT((-45.908461 170.516194))',
                 image: open('http://images.travelpod.com/tw_slides/ta00/cb6/fd0/st-kilda-beach-dunedin-christchurch.jpg', "r"),
                 image_file_name: 'stkilda.jpg')
 
 Location.create(id: 3, name: 'Allans Beach', location_type: 0, blurb: 'Lovely beach out on the peninsula, backdrop to Papanui inlet.',
-		dog_status: 2, geo_access_points: 'MULTIPOINT((-45.8464573 170.6609251))', dog_guidelines: 'Dogs allowed everywhere',
+		dog_status: 2, geo_access_points: 'MULTIPOINT((-45.875067 170.701030))', dog_guidelines: 'Dogs allowed everywhere',
 		image: open('http://images.fineartamerica.com/images-medium-large/allans-beach--new-zealand-czrart.jpg', "r"),
 		image_file_name: 'allans.jpg')
 
 Location.create(id: 4, name: 'Brighton Beach', location_type: 0, blurb: 'Located 30 minutes drive South of the city, its great.',
-		dog_guidelines: 'Dogs okay from the Big Rock tot he small cliff at the north end of the domain of Brighton Road',
-		dog_status: 2, geo_access_points: 'MULTIPOINT((-45.9468324 170.335150099))',
+		dog_guidelines: 'Dogs not allowed within the bay from the Big Rock to the small cliff at the North end of the domain including the estuary and all of the beach within the confines of Brighton Road. Dogs allowed off lead elsewhere. ',
+		dog_status: 0, geo_access_points: 'MULTIPOINT((-45.9468324 170.335150099))',
 		image: open('http://www.wallyandbarbara.com/newzealand/images4/P1040906.JPG', "r"),
 		image_file_name: 'brighton.jpg')
 
 Location.create(id: 5, name: 'Tunnel Beach', location_type: 0, blurb: 'Best at low tide this twenty minute easy walk.',
-		dog_status: 2, geo_access_points: 'MULTIPOINT((-45.92077530 170.45918719))', dog_guidelines: 'Dogs allowed everywhere',
+		dog_status: 1, geo_access_points: 'MULTIPOINT((-45.920753 170.459245))', dog_guidelines: 'Dogs allowed on leash.',
 		image: open('http://www.chrisgin.com/images/seascapes/large/TunnelBeach_1095.jpg', "r"),
 		image_file_name: 'tunnelbeach.jpg')
 
