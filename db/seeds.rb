@@ -48,7 +48,7 @@ Location.create(id: 4,
 DogStatus.create(id: 4,
                  location_id: 4,
                  status: 1,
-                 dog_guidelines: 'Dogs not allowed within the bay from the Big Rock to the small cliff at the North end of the domain including the estuary and all of the beach within the confines of Brighton Road. Dogs allowed off lead elsewhere.')
+                 guidelines: 'Dogs not allowed within the bay from the Big Rock to the small cliff at the North end of the domain including the estuary and all of the beach within the confines of Brighton Road. Dogs allowed off lead elsewhere.')
 
 
 Location.create(id: 5,
@@ -66,12 +66,12 @@ DogStatus.create(id: 5,
 
 Report.create(location_id: 1, geolocation: 'POINT(-45.912665 170.489735)', blurb: "Spotted Penguin playing in the surf",
              image: open('http://d1k2jfc4wnfimc.cloudfront.net/assets/matakohe/images/contentfill.jpg', "r"),
-             image_file_name: 'penguin.jpg', submitted_at: DateTime.now)
+             image_file_name: 'penguin.jpg',created_at: DateTime.now)
 
 Report.create(location_id: 1, geolocation: 'POINT(-45.913587 170.488179)', blurb: "Spotted Penguin shore near Salt Water Pool",
              image: open('http://d1k2jfc4wnfimc.cloudfront.net/assets/matakohe/images/contentfill.jpg', "r"),
-             image_file_name: 'penguin.jpg', submitted_at: DateTime.now)
+             image_file_name: 'penguin.jpg',created_at: DateTime.now)
 
 Report.create(location_id: 2, geolocation: 'POINT(-45.908496 170.531367)', blurb: "Spotted Sea Lion near lookout, far North end of beach.",
              image: open('https://animalblawg.files.wordpress.com/2010/11/the-california-sea-lion.jpg', "r"),
-             image_file_name: 'sealion.jpg', submitted_at: DateTime.now)
+             image_file_name: 'sealion.jpg',created_at: DateTime.now)
