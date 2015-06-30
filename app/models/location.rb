@@ -3,11 +3,11 @@ class Location < ActiveRecord::Base
   has_many :dogstatuses
   has_many :accesses
   validates :name, :presence => true
-  validates :type, :presence => true
+  validates :category, :presence => true
   validates :blurb, :presence => true
   validates :geolocation, :presence => true
 
-  enum type: [ :beach ]
+  enum category: [ :beach ]
 
   has_attached_file :image, :styles => { :medium => "300x300>", :thumb => "100x100>" }
   validates_attachment_presence :image

@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 20150630105047) do
   create_table "locations", force: :cascade do |t|
     t.datetime  "created_at",                                                                    null: false
     t.datetime  "updated_at",                                                                    null: false
-    t.integer   "type",                                                                          null: false
+    t.integer   "category",                                                                      null: false
     t.string    "name",                                                                          null: false
     t.text      "blurb",                                                                         null: false
     t.geography "geolocation",        limit: {:srid=>4326, :type=>"point", :geographic=>true},   null: false

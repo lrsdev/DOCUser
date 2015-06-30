@@ -1,6 +1,6 @@
 Location.create(id: 1, 
                 name: 'St Claire', 
-                type: 0, 
+                type: 0,
                 blurb: 'Nice beach, just 5 minutes drive from the City Center', 
                 geolocation: 'POINT(-45.911775 170.490659)',
                 image: open('http://ih0.redbubble.net/image.3998569.1307/flat,550x550,075,f.jpg', "r"),
@@ -13,9 +13,9 @@ DogStatus.create(id: 1,
 
 Location.create(id: 2,
                 name: 'St Kilda', 
-                location_type: 0, 
+                type: 0, 
                 blurb: '5 minutes drive from the city, South of St. Claire.',
-                geolcoation: 'POINT(-45.908461 170.516194)',
+                geolocation: 'POINT(-45.908461 170.516194)',
                 image: open('http://images.travelpod.com/tw_slides/ta00/cb6/fd0/st-kilda-beach-dunedin-christchurch.jpg', "r"),
                 image_file_name: 'stkilda.jpg')
 
