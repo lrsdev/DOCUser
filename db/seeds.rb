@@ -24,32 +24,54 @@ DogStatus.create(id: 2,
                  status: 1,
                  guidelines: 'Dogs allowed off lead. Take care around rocks at the extreme North end of the beach, wildlife maye be present here.')
 
-=begin
-Location.create(id: 3, name: 'Allans Beach', location_type: 0, blurb: 'Lovely beach out on the peninsula, backdrop to Papanui inlet.',
-		dog_status: 2, geo_access_points: 'MULTIPOINT((-45.875067 170.701030))', dog_guidelines: 'Dogs allowed everywhere',
-		image: open('http://images.fineartamerica.com/images-medium-large/allans-beach--new-zealand-czrart.jpg', "r"),
-		image_file_name: 'allans.jpg')
+Location.create(id: 3,
+                name: 'Allans Beach',
+                category: 0,
+                blurb: 'Lovely beach out on the peninsula, backdrop to Papanui inlet.',
+                geolocation: 'POINT(-45.875067 170.701030)',
+                image: open('http://images.fineartamerica.com/images-medium-large/allans-beach--new-zealand-czrart.jpg', "r"),
+                image_file_name: 'allans.jpg')
 
-Location.create(id: 4, name: 'Brighton Beach', location_type: 0, blurb: 'Located 30 minutes drive South of the city, its great.',
-		dog_guidelines: 'Dogs not allowed within the bay from the Big Rock to the small cliff at the North end of the domain including the estuary and all of the beach within the confines of Brighton Road. Dogs allowed off lead elsewhere. ',
-		dog_status: 1, geo_access_points: 'MULTIPOINT((-45.9468324 170.335150099))',
-		image: open('http://www.wallyandbarbara.com/newzealand/images4/P1040906.JPG', "r"),
-		image_file_name: 'brighton.jpg')
+DogStatus.create(id: 3,
+                 location_id: 3,
+                 status: 2,
+                 guidelines: 'Dogs allowed everywhere.')
 
-Location.create(id: 5, name: 'Tunnel Beach', location_type: 0, blurb: 'Best at low tide this twenty minute easy walk.',
-		dog_status: 0, geo_access_points: 'MULTIPOINT((-45.920753 170.459245))', dog_guidelines: 'Dogs allowed on leash.',
-		image: open('http://www.chrisgin.com/images/seascapes/large/TunnelBeach_1095.jpg', "r"),
-		image_file_name: 'tunnelbeach.jpg')
+Location.create(id: 4,
+                name: 'Brighton Beach',
+                category: 0,
+                blurb: 'Located 30 minutes drive South of the city, its great.',
+                geolocation: 'POINT(-45.9468324 170.335150099)',
+                image: open('http://www.wallyandbarbara.com/newzealand/images4/P1040906.JPG', "r"),
+                image_file_name: 'brighton.jpg')
 
-Report.create(location_id: 1, user_id: 1, geolocation: 'POINT(-45.912665 170.489735)', blurb: "Spotted Penguin playing in the surf",
+DogStatus.create(id: 4,
+                 location_id: 4,
+                 status: 1,
+                 dog_guidelines: 'Dogs not allowed within the bay from the Big Rock to the small cliff at the North end of the domain including the estuary and all of the beach within the confines of Brighton Road. Dogs allowed off lead elsewhere.')
+
+
+Location.create(id: 5,
+                name: 'Tunnel Beach',
+                category: 0,
+                blurb: 'Best at low tide this twenty minute easy walk.',
+                geolocation: 'POINT(-45.920753 170.459245)',
+                image: open('http://www.chrisgin.com/images/seascapes/large/TunnelBeach_1095.jpg', "r"),
+                image_file_name: 'tunnelbeach.jpg')
+
+DogStatus.create(id: 5,
+                 location_id: 5,
+                 status: 0,
+                 guidelines: 'Dogs allowed on a leash.')
+
+Report.create(location_id: 1, geolocation: 'POINT(-45.912665 170.489735)', blurb: "Spotted Penguin playing in the surf",
              image: open('http://d1k2jfc4wnfimc.cloudfront.net/assets/matakohe/images/contentfill.jpg', "r"),
              image_file_name: 'penguin.jpg', submitted_at: DateTime.now)
 
-Report.create(location_id: 1, user_id: 1, geolocation: 'POINT(-45.913587 170.488179)', blurb: "Spotted Penguin shore near Salt Water Pool",
+Report.create(location_id: 1, geolocation: 'POINT(-45.913587 170.488179)', blurb: "Spotted Penguin shore near Salt Water Pool",
              image: open('http://d1k2jfc4wnfimc.cloudfront.net/assets/matakohe/images/contentfill.jpg', "r"),
              image_file_name: 'penguin.jpg', submitted_at: DateTime.now)
 
-Report.create(location_id: 2, user_id: 1, geolocation: 'POINT(-45.908496 170.531367)', blurb: "Spotted Sea Lion near lookout, far North end of beach.",
+Report.create(location_id: 2, geolocation: 'POINT(-45.908496 170.531367)', blurb: "Spotted Sea Lion near lookout, far North end of beach.",
              image: open('https://animalblawg.files.wordpress.com/2010/11/the-california-sea-lion.jpg', "r"),
              image_file_name: 'sealion.jpg', submitted_at: DateTime.now)
-=end
