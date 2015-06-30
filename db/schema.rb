@@ -11,51 +11,62 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150606093230) do
+ActiveRecord::Schema.define(version: 20150630105047) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
 
-  create_table "locations", force: :cascade do |t|
-    t.integer   "location_type"
+  create_table "accesses", force: :cascade do |t|
+    t.integer   "location_id"
     t.string    "name"
     t.text      "blurb"
-    t.text      "dog_guidelines"
-    t.integer   "dog_status"
-    t.geometry  "geo_access_points",  limit: {:srid=>0, :type=>"multi_point"}
-    t.geometry  "geo_fence",          limit: {:srid=>0, :type=>"polygon"}
+    t.geography "geolocation", limit: {:srid=>4326, :type=>"point", :geographic=>true}, null: false
+    t.datetime  "created_at",                                                           null: false
+    t.datetime  "updated_at",                                                           null: false
+  end
+
+  add_index "accesses", ["location_id"], name: "index_accesses_on_location_id", using: :btree
+
+  create_table "dog_statuses", force: :cascade do |t|
+    t.integer  "location_id"
+    t.integer  "status",      null: false
+    t.text     "guidelines",  null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "dog_statuses", ["location_id"], name: "index_dog_statuses_on_location_id", using: :btree
+
+  create_table "locations", force: :cascade do |t|
+    t.datetime  "created_at",                                                                    null: false
+    t.datetime  "updated_at",                                                                    null: false
+    t.integer   "type",                                                                          null: false
+    t.string    "name",                                                                          null: false
+    t.text      "blurb",                                                                         null: false
+    t.geography "geolocation",        limit: {:srid=>4326, :type=>"point", :geographic=>true},   null: false
+    t.geography "geofence",           limit: {:srid=>4326, :type=>"polygon", :geographic=>true}
     t.string    "image_file_name"
     t.string    "image_content_type"
     t.integer   "image_file_size"
     t.datetime  "image_updated_at"
-    t.geography "latlon",             limit: {:srid=>4326, :type=>"point", :geographic=>true}
   end
 
   create_table "reports", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "location_id"
-    t.integer  "animal_id"
-    t.text     "blurb"
-    t.geometry "geolocation",        limit: {:srid=>0, :type=>"point"}
-    t.string   "image_file_name"
-    t.string   "image_content_type"
-    t.integer  "image_file_size"
-    t.datetime "image_updated_at"
-    t.datetime "submitted_at"
+    t.integer   "location_id"
+    t.text      "blurb"
+    t.geography "geolocation",        limit: {:srid=>4326, :type=>"point", :geographic=>true}
+    t.datetime  "created_at",                                                                  null: false
+    t.datetime  "updated_at",                                                                  null: false
+    t.string    "image_file_name"
+    t.string    "image_content_type"
+    t.integer   "image_file_size"
+    t.datetime  "image_updated_at"
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string   "first_name"
-    t.string   "middle_names"
-    t.string   "last_name"
-    t.string   "email"
-    t.string   "password"
-    t.string   "api_key"
-    t.string   "avatar_file_name"
-    t.string   "avatar_content_type"
-    t.integer  "avatar_file_size"
-    t.datetime "avatar_updated_at"
-  end
+  add_index "reports", ["location_id"], name: "index_reports_on_location_id", using: :btree
 
+  add_foreign_key "accesses", "locations"
+  add_foreign_key "dog_statuses", "locations"
+  add_foreign_key "reports", "locations"
 end

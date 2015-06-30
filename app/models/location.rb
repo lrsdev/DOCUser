@@ -1,26 +1,21 @@
 class Location < ActiveRecord::Base
   has_many :reports
+  has_many :dogstatuses
+  has_many :accesses
   validates :name, :presence => true
-  validates :location_type, :presence => true
+  validates :type, :presence => true
   validates :blurb, :presence => true
-  validates :dog_guidelines, :presence => true
-  validates :dog_status, :presence => true
+  validates :geolocation, :presence => true
 
-  # Enums for state representation 0 =>
-  enum location_type: [ :beach ]
-  enum dog_status: [ "on lead", "off lead", "no dogs" ]
+  enum type: [ :beach ]
 
   has_attached_file :image, :styles => { :medium => "300x300>", :thumb => "100x100>" }
   validates_attachment_presence :image
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
 
-  def access_points
-    a = Array.new
-    geo_access_points.each {|p| a << {'latitude': p.x, 'longitude': p.y}}
-    return a
-  end
-
   # Return last 5 reports in JSON response
+  
+=begin
   def as_json(options = {})
     {
       :id => id,
@@ -35,4 +30,5 @@ class Location < ActiveRecord::Base
       :access_points => access_points
     }
   end
+=end
 end

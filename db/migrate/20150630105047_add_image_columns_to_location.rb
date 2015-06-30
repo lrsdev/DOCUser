@@ -1,9 +1,8 @@
-class AddImageColumnsToLocations < ActiveRecord::Migration
-  def self.up
+class AddImageColumnsToLocation < ActiveRecord::Migration
+  def up
     add_attachment :locations, :image
   end
-
-  def self.dowm
+  def down
     remove_attachment :locations, :image
   end
 end
