@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :animals, except: [:new, :edit]
   resources :reports, except: [:new, :edit]
   resources :locations, except: [:new, :edit]
   resources :users, except: [:new, :edit]

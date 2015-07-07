@@ -24,7 +24,8 @@ gem 'rails_12factor', group: :production
 # gem 'bcrypt', '~> 3.1.7'
 
 # To use Jbuilder templates for JSON
-gem 'jbuilder'
+#gem 'jbuilder'
+gem 'active_model_serializers'
 
 # Use unicorn as the app server
 # gem 'unicorn'

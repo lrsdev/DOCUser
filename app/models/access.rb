@@ -1,4 +1,4 @@
 class Access < ActiveRecord::Base
   belongs_to :location
-  validates :geolocation, present: true
+  validates :geolocation, presence: true
 end
