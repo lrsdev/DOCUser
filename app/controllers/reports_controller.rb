@@ -4,12 +4,7 @@ class ReportsController < ApplicationController
   # GET /reports
   # GET /reports.json
   def index
-    if(params.has_key?(:location_id))
-      @reports = Array.wrap(Report.where(location_id: params[:location_id]))
-    else
-      @reports = Report.all 
-    end
-
+    @reports = Report.all 
     render json: @reports
   end
 
@@ -24,13 +19,6 @@ class ReportsController < ApplicationController
   def create
     @report = Report.new(report_params)
 
-    image_params = params[:image]
-    encoded_image = image_params[:image_data]
-    content_type = image_params[:image_content_type]
-    image = Paperclip.io_adapters.for("data:#{content_type};base64,#{encoded_image}")
-    image.original_filename = image_params[:image_filename]
-    @report.image = image
-    
     lat = params[:latitude]
     long = params[:longitude]
     p = RGeo::Cartesian.factory.point(lat, long)
@@ -59,7 +47,6 @@ class ReportsController < ApplicationController
   # DELETE /reports/1.json
   def destroy
     @report.destroy
-
     head :no_content
   end
 
@@ -70,10 +57,6 @@ class ReportsController < ApplicationController
   end
 
   def report_params
-    params.permit(:location_id, :user_id, :animal_id, :blurb, :geolocation, :submitted_at)
-  end
-
-  def extra_params
-    params.permit(:image, :latitude, :longitude)
+    params.permit(:created_at, :image, :blurb, :location_id)
   end
 end

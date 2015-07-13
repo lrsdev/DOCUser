@@ -2,6 +2,8 @@ class Location < ActiveRecord::Base
   has_many :reports
   has_many :dog_statuses, :dependent => :destroy
   has_many :accesses, :dependent => :destroy
+  has_many :animal_locations
+  has_many :animals, :through => :animal_locations
   validates :name, :presence => true
   validates :category, :presence => true
   validates :blurb, :presence => true

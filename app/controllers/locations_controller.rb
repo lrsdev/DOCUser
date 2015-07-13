@@ -5,7 +5,7 @@ class LocationsController < ApplicationController
   # GET /locations.json
   def index
     @locations = Location.all
-    render json: @locations 
+    render json: @locations
   end
 
   # GET /locations/1
@@ -18,13 +18,6 @@ class LocationsController < ApplicationController
   # POST /locations.json
   def create
     @location = Location.new(location_params)
-
-    image_params = params[:image]
-    encoded_image = image_params[:image_data]
-    content_type = image_params[:image_content_data]
-    image = Paperclip.io_adapters.for("data:#{content_type};base64,#{encoded_image}")
-    image.original_filename = image_params[:image_filename]
-    @location.image = image
 
     if @location.save
       render json: @location, status: :created, location: @location

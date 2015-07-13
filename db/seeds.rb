@@ -1,3 +1,15 @@
+Animal.create(name: 'Yellow-Eyed Penguin', blurb: 'Some blurb', ext_url: 'wikipedia.org',
+             image: open('https://upload.wikimedia.org/wikipedia/commons/4/4f/Yellow-eyed_Penguin_MC.jpg', "r"),
+             image_file_name: 'yelloweye.jpg')
+
+Animal.create(name: 'Blue Penguin', blurb: 'Some blurb', ext_url: 'wikipedia.org',
+             image: open('https://upload.wikimedia.org/wikipedia/commons/3/38/Eudyptula_minor_Bruny_1.jpg', "r"),
+             image_file_name: 'bluepenguin.jpg')
+        
+Animal.create(name: 'Sea Lion', blurb: 'Some blurb', ext_url: 'wikipedia.org',
+             image: open('https://upload.wikimedia.org/wikipedia/commons/b/b9/New_Zealand_Sea_Lion.jpg', "r"),
+             image_file_name: 'sealion.jpg')
+
 Location.create(id: 1, 
                 name: 'St Claire', 
                 category: 0,
@@ -66,12 +78,17 @@ DogStatus.create(id: 5,
 
 Report.create(location_id: 1, geolocation: 'POINT(-45.912665 170.489735)', blurb: "Spotted Penguin playing in the surf",
              image: open('http://d1k2jfc4wnfimc.cloudfront.net/assets/matakohe/images/contentfill.jpg', "r"),
-             image_file_name: 'penguin.jpg',created_at: DateTime.now)
+             image_file_name: 'penguin.jpg',created_at: DateTime.now, animal_id: 1)
 
 Report.create(location_id: 1, geolocation: 'POINT(-45.913587 170.488179)', blurb: "Spotted Penguin shore near Salt Water Pool",
              image: open('http://d1k2jfc4wnfimc.cloudfront.net/assets/matakohe/images/contentfill.jpg', "r"),
-             image_file_name: 'penguin.jpg',created_at: DateTime.now)
+             image_file_name: 'penguin.jpg',created_at: DateTime.now, animal_id: 2)
 
 Report.create(location_id: 2, geolocation: 'POINT(-45.908496 170.531367)', blurb: "Spotted Sea Lion near lookout, far North end of beach.",
              image: open('https://animalblawg.files.wordpress.com/2010/11/the-california-sea-lion.jpg', "r"),
-             image_file_name: 'sealion.jpg',created_at: DateTime.now)
+             image_file_name: 'sealion.jpg',created_at: DateTime.now, animal_id: 3)
+
+
+AnimalLocation.create(animal_id: 1, location_id: 1)
+AnimalLocation.create(animal_id: 2, location_id: 1)
+AnimalLocation.create(animal_id: 3, location_id: 2)

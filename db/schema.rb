@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150707035652) do
+ActiveRecord::Schema.define(version: 20150707083319) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,16 @@ ActiveRecord::Schema.define(version: 20150707035652) do
   end
 
   add_index "accesses", ["location_id"], name: "index_accesses_on_location_id", using: :btree
+
+  create_table "animal_locations", force: :cascade do |t|
+    t.integer  "animal_id"
+    t.integer  "location_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "animal_locations", ["animal_id"], name: "index_animal_locations_on_animal_id", using: :btree
+  add_index "animal_locations", ["location_id"], name: "index_animal_locations_on_location_id", using: :btree
 
   create_table "animals", force: :cascade do |t|
     t.string   "name"
@@ -75,11 +85,16 @@ ActiveRecord::Schema.define(version: 20150707035652) do
     t.string    "image_content_type"
     t.integer   "image_file_size"
     t.datetime  "image_updated_at"
+    t.integer   "animal_id"
   end
 
+  add_index "reports", ["animal_id"], name: "index_reports_on_animal_id", using: :btree
   add_index "reports", ["location_id"], name: "index_reports_on_location_id", using: :btree
 
   add_foreign_key "accesses", "locations"
+  add_foreign_key "animal_locations", "animals"
+  add_foreign_key "animal_locations", "locations"
   add_foreign_key "dog_statuses", "locations"
+  add_foreign_key "reports", "animals"
   add_foreign_key "reports", "locations"
 end
