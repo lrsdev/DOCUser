@@ -57,6 +57,6 @@ class ReportsController < ApplicationController
   end
 
   def report_params
-    params.permit(:created_at, :image, :blurb, :location_id)
+    params.permit(:created_at, :image, :blurb, :location_id, :animal_type)
   end
 end
