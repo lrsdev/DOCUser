@@ -5,6 +5,7 @@ class CreateReports < ActiveRecord::Migration
       t.text :blurb
       t.st_point :geolocation, geographic: true
       t.timestamps null: false
+      t.string :animal_type
     end
   end
 end

@@ -21,7 +21,7 @@ class ReportsController < ApplicationController
 
     lat = params[:latitude]
     long = params[:longitude]
-    p = RGeo::Cartesian.factory.point(lat, long)
+    p = RGeo::Cartesian.factory.point(long, lat)
     @report.geolocation = p
 
     if @report.save

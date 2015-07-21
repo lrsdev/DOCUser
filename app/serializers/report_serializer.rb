@@ -1,6 +1,7 @@
 class ReportSerializer < ActiveModel::Serializer
-  attributes :id, :location_id, :blurb, :image, :geolocation
+  attributes :id, :location_id, :blurb, :image, :geolocation, :animal_id, :created_at
   belongs_to :location
+  belongs_to :animal
 
   def image
     {'thumbnail': object.image.url(:thumb),
