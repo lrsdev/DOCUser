@@ -4,7 +4,11 @@ class ReportsController < ApplicationController
   # GET /reports
   # GET /reports.json
   def index
-    @reports = Report.all 
+    if params.has_key?("location_id")
+      @reports = Report.where(:location_id => params["location_id"])
+    else
+      @reports = Report.all 
+    end
     render json: @reports
   end
 

@@ -1,5 +1,5 @@
 class ReportSerializer < ActiveModel::Serializer
-  attributes :id, :location_id, :blurb, :image, :geolocation, :animal_id, :created_at
+  attributes :id, :location_id, :blurb, :image, :geolocation, :animal_id, :created_at, :animal_type
   belongs_to :location
   belongs_to :animal
 
