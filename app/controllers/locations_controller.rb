@@ -1,21 +1,20 @@
 class LocationsController < ApplicationController
   before_action :set_location, only: [:show, :update, :destroy]
 
-  # GET /locations
-  # GET /locations.json
   def index
     @locations = Location.all
     render json: @locations
   end
 
-  # GET /locations/1
-  # GET /locations/1.json
   def show
     render json: @location
   end
 
+  # Other controller actions unapplicable.
+
   # POST /locations
   # POST /locations.json
+=begin
   def create
     @location = Location.new(location_params)
 
@@ -45,6 +44,7 @@ class LocationsController < ApplicationController
 
     head :no_content
   end
+=end
 
   private
 
