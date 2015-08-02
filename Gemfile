@@ -16,7 +16,7 @@ gem 'aws-sdk', '< 2.0'
 
 gem 'pg'
 # Only this version supports ActiveRecord 4.2
-gem 'activerecord-postgis-adapter', '3.0.0.beta5'
+gem 'activerecord-postgis-adapter', '~> 3.0.0'
 gem 'rails_12factor', group: :production
 
 
@@ -26,8 +26,8 @@ gem 'rails_12factor', group: :production
 # To use Jbuilder templates for JSON
 #gem 'jbuilder'
 #gem 'active_model_serializers', '0.10.0.rc2'
-gem 'active_model_serializers', :git => 'https://github.com/rails-api/active_model_serializers.git'
-
+#gem 'active_model_serializers', :git => 'https://github.com/rails-api/active_model_serializers.git'
+gem 'active_model_serializers', '~> 0.10.0.rc2'
 # Use unicorn as the app server
 # gem 'unicorn'
 
