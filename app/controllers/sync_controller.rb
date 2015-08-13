@@ -13,7 +13,7 @@ class SyncController < ApplicationController
           @sync.new << l
 
         # no longer active, and was created before last sync, client needs to delete
-        elsif !l.active? and created_at < params[:from]
+        elsif !l.active? and l.created_at < params[:from]
           @sync.deleted << l.id
 
         # record exists with client, and has been updated
