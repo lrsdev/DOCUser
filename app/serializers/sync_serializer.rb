@@ -1,6 +1,7 @@
 class SyncSerializer < ActiveModel::Serializer
   attribute :location_sync, key: :locations
   attribute :animal_sync, key: :animals
+  attribute :synced_at
 
   def locations
     s = LocationSyncSerializer.new(object.location_sync)
