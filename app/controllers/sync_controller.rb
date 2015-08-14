@@ -4,25 +4,31 @@ class SyncController < ApplicationController
     if params[:from]
       @timestamp = params[:from]
       @sync = Sync.new()
-      @sync.synced_at= Time.now()
       @locations = Location.where("updated_at >= ?", @timestamp)
+      @animals = Animal.where("updated_at >= ?", @timestamp)
 
-      @locations.each do |l|
-        if l.active?
-          if l.created_at >= @timestamp
-            @sync.new << l
-          else
-            if l.image_updated_at >= @timestamp
-              @sync.updated_image << l
-            else
-              @sync.updated << l
-            end
-          end
-        elsif l.created_at < @timestamp
-          @sync.deleted << l.id
-        end
-      end
+      build_sync_object(@sync.location_sync, @locations)
+      build_sync_object(@sync.animal_sync, @animals)
     end
     render json: @sync, serializer: SyncSerializer
   end
+
+  def build_sync_object(sync_object, collection)
+    collection.each do |l|
+        if l.active
+          if l.created_at >= @timestamp
+            sync_object.new << l
+          else
+            if l.image_updated_at >= @timestamp
+              sync_object.image_updated << l
+            else
+              sync_object.updated << l
+            end
+          end
+        elsif l.created_at < @timestamp
+          sync_object.deleted << l.id
+        end
+      end
+  end
+
 end

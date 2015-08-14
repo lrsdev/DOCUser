@@ -1,24 +1,14 @@
 class SyncSerializer < ActiveModel::Serializer
+  attribute :location_sync, key: :locations
+  attribute :animal_sync, key: :animals
 
-  attributes :new, :updated, :updated_image, :deleted, :synced_at
-
-  def updated
-    serialize(object.updated)
+  def locations
+    s = LocationSyncSerializer.new(object.location_sync)
+    ActiveModel::Serializer::Adapter::FlattenJson.new(s).as_json
   end
 
-  def new
-    serialize(object.new)
-  end
-
-  def updated_image
-    serialize(object.updated_image)
-  end
-
-  # Serialize location collections
-  def serialize(l)
-    # Pieced together from source code and github issues
-    s = ActiveModel::Serializer::ArraySerializer.new(l, serializer: LocationSerializer)
-    # Application uses Json adapter by default, find a way to use adapter controllers are using
-    ActiveModel::Serializer::Adapter::Json.new(s).as_json
+  def animals
+    s = AnimalSyncSerializer.new(object.animal_sync)
+    ActiveModel::Serializer::Adapter::FlattenJson.new(s).as_json
   end
 end
