@@ -1,7 +1,7 @@
 class LocationSerializer < ActiveModel::Serializer
   attributes :id, :name, :category, :animal_blurb, :dog_status, :dog_guidelines,
     :image_thumbnail, :image_medium, :latitude, :longitude
-  has_many :reports 
+  #has_many :reports 
   #has_many :dog_statuses, :key => :dog_status
 
   def image_medium

@@ -2,35 +2,27 @@ class SyncController < ApplicationController
 
   def index
     if params[:from]
-
-      # Return all locations that have had some sort of update since last sync
-      @locations = Location.where("updated_at >= ?", params[:from])
+      @timestamp = params[:from]
       @sync = Sync.new()
+      @sync.synced_at= Time.now()
+      @locations = Location.where("updated_at >= ?", @timestamp)
 
       @locations.each do |l|
-        # if record was created after last sync
-        if l.created_at >= params[:from] and l.active?
-          @sync.new << l
-
-        # no longer active, and was created before last sync, client needs to delete
-        elsif !l.active? and l.created_at < params[:from]
-          @sync.deleted << l.id
-
-        # record exists with client, and has been updated
-        else
-          
-          # image and possibly some text attributes have been updated
-          if l.image_updated_at >= params[:from]
-            @sync.updated_image << l
-
-          # some text attribute has been updated
+        if l.active?
+          if l.created_at >= @timestamp
+            @sync.new << l
           else
-            @sync.updated << l
+            if l.image_updated_at >= @timestamp
+              @sync.updated_image << l
+            else
+              @sync.updated << l
+            end
           end
+        elsif l.created_at < @timestamp
+          @sync.deleted << l.id
         end
       end
     end
-
     render json: @sync, serializer: SyncSerializer
   end
 end

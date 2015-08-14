@@ -1,6 +1,6 @@
 class SyncSerializer < ActiveModel::Serializer
 
-  attributes :new, :updated, :updated_image, :deleted
+  attributes :new, :updated, :updated_image, :deleted, :synced_at
 
   def updated
     serialize(object.updated)
