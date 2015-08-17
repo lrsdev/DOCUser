@@ -6,6 +6,7 @@ class SyncSerializer < ActiveModel::Serializer
   attribute :animal_ids
   attribute :deleted_animal_ids
   attribute :synced_at
+  attribute :sync_elapsed
 
   def locations
     s = ActiveModel::Serializer::ArraySerializer.new(object.locations, serializer: LocationSerializer)
