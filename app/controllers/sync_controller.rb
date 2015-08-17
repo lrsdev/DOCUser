@@ -4,11 +4,12 @@ class SyncController < ApplicationController
     if params[:from]
       @timestamp = params[:from]
       @sync = Sync.new()
-      @locations = Location.where("updated_at >= ?", @timestamp)
-      @animals = Animal.where("updated_at >= ?", @timestamp)
-
-      build_sync_object(@sync.location_sync, @locations)
-      build_sync_object(@sync.animal_sync, @animals)
+      @locations = Location.where("updated_at >= ? and active = ?", @timestamp, true).order(id: :asc)
+      @animals = Animal.where("updated_at >= ? and target = ?", @timestamp, true).order(id: :asc)
+#      build_sync_object(@sync.location_sync, @locations)
+#      build_sync_object(@sync.animal_sync, @animals)
+      @sync.locations= @locations
+      @sync.animals= @animals
     end
     render json: @sync, serializer: SyncSerializer
   end

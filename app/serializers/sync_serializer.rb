@@ -1,15 +1,31 @@
 class SyncSerializer < ActiveModel::Serializer
-  attribute :location_sync, key: :locations
-  attribute :animal_sync, key: :animals
+  attribute :locations
+  attribute :animals
   attribute :synced_at
+  attribute :location_ids
+  attribute :animal_ids
 
   def locations
-    s = LocationSyncSerializer.new(object.location_sync)
+    s = ActiveModel::Serializer::ArraySerializer.new(object.locations, serializer: LocationSerializer)
     ActiveModel::Serializer::Adapter::FlattenJson.new(s).as_json
   end
 
   def animals
-    s = AnimalSyncSerializer.new(object.animal_sync)
+    s = ActiveModel::Serializer::ArraySerializer.new(object.animals, serializer: AnimalSerializer)
     ActiveModel::Serializer::Adapter::FlattenJson.new(s).as_json
+  end
+
+  def location_ids
+    ids = []
+    object.locations.each { |l|
+      ids << l.id }
+    ids
+  end
+
+  def animal_ids
+    ids = []
+    object.animals.each { |a|
+      ids << a.id }
+    ids
   end
 end
