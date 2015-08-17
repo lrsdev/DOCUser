@@ -4,32 +4,25 @@ class SyncController < ApplicationController
     if params[:from]
       @timestamp = params[:from]
       @sync = Sync.new()
+
+      # Goto database once for each model
       @locations = Location.where("updated_at >= ? and active = ?", @timestamp, true).order(id: :asc)
+
+
+      @location_ids = @locations.ids
+      @deleted_location_ids = Location.where("created_at < ? and updated_at >= ? and active = ?", @timestamp, @timestamp, false).order(id: :asc).ids
+
       @animals = Animal.where("updated_at >= ? and target = ?", @timestamp, true).order(id: :asc)
-#      build_sync_object(@sync.location_sync, @locations)
-#      build_sync_object(@sync.animal_sync, @animals)
+      @animal_ids = @animals.ids
+      @deleted_animal_ids = Animal.where("updated_at >= ? and target = ?", @timestamp, false).order(id: :asc).ids
+
       @sync.locations= @locations
+      @sync.location_ids= @location_ids
       @sync.animals= @animals
+      @sync.animal_ids= @animals_ids
+      @sync.deleted_location_ids = @deleted_location_ids
+      @sync.deleted_animal_ids = @deleted_animal_ids
     end
     render json: @sync, serializer: SyncSerializer
   end
-
-  def build_sync_object(sync_object, collection)
-    collection.each do |l|
-        if l.active
-          if l.created_at >= @timestamp
-            sync_object.new << l
-          else
-            if l.image_updated_at >= @timestamp
-              sync_object.image_updated << l
-            else
-              sync_object.updated << l
-            end
-          end
-        elsif l.created_at < @timestamp
-          sync_object.deleted << l.id
-        end
-      end
-  end
-
 end
