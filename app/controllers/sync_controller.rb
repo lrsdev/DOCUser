@@ -12,11 +12,11 @@ class SyncController < ApplicationController
       # Get active locations from active record relation, and records which are inactive, but
       # were created before the timestamp (should be present in users local database)
       @sync.locations= @locations.where("active = ?", true)
-      @sync.deleted_location_ids= @locations.where("active = ? and created_at < ?", false, @timestamp)
+      @sync.deleted_location_ids= @locations.where("active = ? and created_at < ?", false, @timestamp).ids
 
       # Repeat for animals
       @sync.animals= @animals.where("target = ?", true)
-      @sync.deleted_animal_ids= @animals.where("target = ? and created_at < ?", false, @timestamp)
+      @sync.deleted_animal_ids= @animals.where("target = ? and created_at < ?", false, @timestamp).ids
 
       @sync.sync_elapsed= Time.now - @sync.synced_at
     end
