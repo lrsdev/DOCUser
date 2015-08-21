@@ -1,8 +1,8 @@
 class Animal < ActiveRecord::Base
-  validates :name, presence: true, length: { maximum: 50 }
-  validates :blurb, presence: true, length: { maximum: 140 }
-  validates :guidelines, presence: true, length: { maximum: 140 }
-  validates :target, presence: true
+  validates :name, presence: true
+  validates :blurb, presence: true
+  validates :guidelines, presence: true
+  validates :target, inclusion: { in: [true, false] }
   validates :ext_url, presence: true
 
   has_many :reports
@@ -11,6 +11,7 @@ class Animal < ActiveRecord::Base
   validates_attachment_presence :image
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
 
+  # Serializing the target attribute as active instead.
   def active
     return self.target
   end
