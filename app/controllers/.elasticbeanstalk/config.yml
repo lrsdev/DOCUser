@@ -1,0 +1,10 @@
+branch-defaults:
+  default:
+    environment: user-devel
+global:
+  application_name: docprojectuser
+  default_ec2_keyname: docproject
+  default_platform: 64bit Amazon Linux 2015.03 v1.4.3 running Ruby 2.2 (Puma)
+  default_region: ap-southeast-2
+  profile: eb-cli
+  sc: null
