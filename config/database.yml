@@ -1,6 +1,6 @@
 adapter: postgis
 encoding: utf8
-database: <% ENV["POSTGRES_DATABASE"] %>
+database: <%= ENV["POSTGRES_DATABASE"] %>
 pool: 5
 username: <%= ENV["POSTGRES_USERNAME"] %>
 password: <%= ENV["POSTGRES_PASSWORD"] %>
