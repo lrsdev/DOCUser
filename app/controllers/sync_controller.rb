@@ -15,8 +15,8 @@ class SyncController < ApplicationController
       @sync.deleted_location_ids= @locations.where("active = ? and created_at < ?", false, @timestamp).ids
 
       # Repeat for animals
-      @sync.animals= @animals.where("target = ?", true)
-      @sync.deleted_animal_ids= @animals.where("target = ? and created_at < ?", false, @timestamp).ids
+      @sync.animals= @animals.where("active = ?", true)
+      @sync.deleted_animal_ids= @animals.where("active = ? and created_at < ?", false, @timestamp).ids
 
       @sync.sync_elapsed= Time.now - @sync.synced_at
     end
